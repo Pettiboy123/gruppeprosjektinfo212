@@ -6,7 +6,6 @@ from .serializers import CarSerializer
 from .serializers import CustomerSerializer
 from .serializers import EmployeeSerializer
 from rest_framework import status
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
 @api_view(['GET'])
