@@ -25,13 +25,17 @@ urlpatterns = [
     path("update_car/<int:id>", update_car),
     path("delete_car/<int:id>", delete_car),
     path("customer/", get_customers),
-    path("savecustomer/", save_customer),
+    path("save_customer/", save_customer),
     path("update_customer/<int:id>", update_customer),
     path("delete_customer/<int:id>", delete_customer),
     path("employee/", get_employees),
     path("saveemployee/", save_employee),
     path("update_employee/<int:id>", update_employee),
     path("delete_employee/<int:id>", delete_employee),
+    path("order_car/", order_car),
+    path("cancel_order_car/", cancel_order_car),
+    path("rent_car/", rent_car),
+    path("return_car/", return_car),
 
     
 ]
