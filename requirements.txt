@@ -1,0 +1,4 @@
+django-rest-framework==0.1.0
+Django==3.1.7
+djangorestframework==3.14.0
+virtualenv==20.16.6
