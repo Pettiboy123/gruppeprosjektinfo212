@@ -138,7 +138,8 @@ def delete_employee(request, id):
 @api_view(['POST'])
 def order_car(request):
     customerId = request.data.get("customerId")
-    if Order.objects.filter(customerId=customerId).exists():
+    order = Order.objects.filter(customerId=customerId)
+    if order.exists():
         return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
         serializer = OrderSerializer(data=request.data)
@@ -154,7 +155,8 @@ def cancel_order_car(request):
     customerId = request.data.get("customerId")
     carId = request.data.get("carId")
     order = Order.objects.filter(customerId=customerId)
-    if order.exists() and order.first().id == carId:
+    print(order)
+    if order.exists() and order.first().carId_id == carId:
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     else:
@@ -165,7 +167,8 @@ def rent_car(request):
     customerId = request.data.get("customerId")
     carId = request.data.get("carId")
     order = Order.objects.filter(customerId=customerId)
-    if order.exists() and order.first().id == carId:
+    print(order)
+    if order.exists() and order.first().carId_id == carId:
         order.update(active=True)
         return Response(status=status.HTTP_204_NO_CONTENT)
     else:
@@ -177,10 +180,11 @@ def return_car(request):
     carId = request.data.get("carId")
     carStatus = request.data.get("carStatus")
     order = Order.objects.filter(customerId=customerId)
+    print(order)
     car = Car.objects.filter(id=carId)
     if not car.exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
-    if order.exists() and order.first().id == carId and order.first().active:
+    if order.exists() and order.first().carId_id == carId and order.first().active:
         order.delete()
         if carStatus == 'Damaged':
             car.update(damaged=True)
